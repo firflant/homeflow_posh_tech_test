@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-const searchPhraseState = atom({
+export const searchPhraseState = atom({
   key: 'searchPhraseState',
   default: '',
 });
