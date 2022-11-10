@@ -1,12 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useRecoilState } from 'recoil';
 import Header from './Header';
 import PropertyCard from './PropertyCard';
+import { searchPhraseState } from './globalState'
 
 function App() {
   const [properties, setProperties] = useState();
 
   // use this state to keep track of the user's saved/bookmarked properties
   const [savedProperties, setSavedProperties] = useState([]);
+
+  const [searchPhrase, setSearchPhrase] = useRecoilState(searchPhraseState);
 
   useEffect(() => {
     const fetchPropertyData = async () => {
