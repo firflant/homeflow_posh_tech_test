@@ -7,7 +7,6 @@ import { searchPhraseState } from './globalState'
 function App() {
   const [properties, setProperties] = useState([]);
 
-  // use this state to keep track of the user's saved/bookmarked properties
   const [savedProperties, setSavedProperties] = useState([]);
 
   const searchPhrase = useRecoilValue(searchPhraseState);
@@ -30,12 +29,26 @@ function App() {
     [properties, searchPhrase],
   )
 
+  const toggleSavedProperties = id => {
+    setSavedProperties(prevState => prevState.includes(id)
+      ? prevState.filter(item => item !== id)
+      : [...prevState, id]
+    )
+  }
+
   return (
     <div className="container mx-auto my-5">
       <Header />
 
       <div className="grid grid-cols-1 gap-4 mt-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {!!fitleredProperties && fitleredProperties.map((property) => <PropertyCard key={property.property_id} property={property} />)}
+        {!!fitleredProperties && fitleredProperties.map((property) =>
+          <PropertyCard
+            key={property.property_id}
+            property={property}
+            isSaved={savedProperties.includes(property.property_id)}
+            onSave={() => toggleSavedProperties(property.property_id)}
+          />
+        )}
       </div>
     </div>
   );
