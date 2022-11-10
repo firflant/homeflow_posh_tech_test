@@ -4,7 +4,13 @@ function PropertyCard({ property }) {
   return (
     <div className="border-2 bg-gray-50">
       <div className="relative">
-        <img src={`https://mr0.homeflow.co.uk/${property.photos[0]}`} alt={property.display_address} />
+        <img
+          src={property.photos[0]
+            ? `https://mr0.homeflow.co.uk/${property.photos[0]}`
+            : 'https://via.placeholder.com/700x450?text=Property'
+          }
+          alt={property.display_address}
+        />
 
         <button className="absolute top-0 right-2" title="Click to bookmark this property">
           <FaBookmark className="text-yellow-400" size="40" />
